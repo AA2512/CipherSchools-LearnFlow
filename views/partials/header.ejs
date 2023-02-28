@@ -1,0 +1,140 @@
+<section
+  class="header-account-page d-flex align-items-end"
+  style="
+    background-image: linear-gradient(
+        to bottom,
+        rgba(245, 246, 252, 0.52),
+        rgba(82, 72, 79, 0.73)
+      ),
+      url('/cstm-assets/hero-2.jpg');
+    background-position: center;
+    background-size: cover;
+  "
+  data-offset-top="#header-main"
+>
+  <!-- Header container -->
+  <div class="container pt-4 pt-lg-0">
+    <div class="row justify-content-end">
+      <div class="col-lg-8">
+        <!-- Salute + Small stats -->
+        <div
+          class="row align-items-center mb-4 bg-primary"
+          style="
+            width: 40% !important;
+            display: block;
+            border: 5px solid black;
+            border-radius: 20px !important;
+            padding: 20px;
+          "
+        >
+          <div
+            class="col-lg-8 col-xl-5 mb-4 mb-md-0"
+            style="max-width: 100% !important"
+          >
+            <span class="h2 mb-0 text-white d-block"
+              >Howdy, <%= user.username %></span
+            >
+            <span class="text-white">Have a nice day!</span>
+          </div>
+        </div>
+        <!-- Account navigation -->
+        <div class="d-flex">
+          <a
+            href="/profile"
+            class="btn btn-icon btn-group-nav shadow btn-neutral"
+          >
+            <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
+            <span class="btn-inner--text d-none d-md-inline-block"
+              >My Profile</span
+            >
+          </a>
+          <div
+            class="btn-group btn-group-nav shadow ml-auto"
+            role="group"
+            aria-label="Basic example"
+          >
+            <div class="btn-group" role="group">
+              <% if(user.role==0) { %>
+              <button
+                id="btn-group-settings"
+                type="button"
+                class="btn btn-neutral btn-icon"
+                data-offset="0,8"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onclick="(()=>{
+                  window.location.href=`/post/create/new`
+                })()"
+              >
+                <span class="btn-inner--icon"><i class="fas fa-pen"></i></span>
+                <span class="btn-inner--text d-none d-sm-inline-block"
+                  >Post</span
+                >
+              </button>
+              <% } %>
+            </div>
+            <!-- <div class="btn-group" role="group">
+              <button
+                id="btn-group-boards"
+                type="button"
+                class="btn btn-neutral btn-icon"
+                data-toggle="dropdown"
+                data-offset="0,8"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="btn-inner--icon"
+                  ><i class="fas fa-chart-line"></i
+                ></span>
+                <span class="btn-inner--text d-none d-sm-inline-block"
+                  >Board</span
+                >
+              </button>
+              <div
+                class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                aria-labelledby="btn-group-boards"
+              >
+                <a class="dropdown-item" href="board-overview.html">Overview</a>
+                <a class="dropdown-item" href="board-projects.html">Projects</a>
+                <a class="dropdown-item" href="board-tasks.html">Tasks</a>
+                <a class="dropdown-item" href="board-connections.html"
+                  >Connections</a
+                >
+              </div>
+            </div>
+            <div class="btn-group" role="group">
+              <button
+                id="btn-group-listing"
+                type="button"
+                class="btn btn-neutral btn-icon rounded-right"
+                data-toggle="dropdown"
+                data-offset="0,8"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="btn-inner--icon"
+                  ><i class="fas fa-list-ul"></i
+                ></span>
+                <span class="btn-inner--text d-none d-sm-inline-block"
+                  >Listing</span
+                >
+              </button>
+              <div
+                class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                aria-labelledby="btn-group-settings"
+              >
+                <span class="dropdown-header">Tables</span>
+                <a class="dropdown-item" href="listing-orders.html">Orders</a>
+                <a class="dropdown-item" href="listing-projects.html"
+                  >Projects</a
+                >
+                <span class="dropdown-header">Flex</span>
+                <a class="dropdown-item" href="listing-users.html">Users</a>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Purpose is a unique and beautiful collection of UI elements that are all flexible and modular. A complete and customizable solution to building the website of your dreams."
+    />
+    <meta name="author" content="Webpixels" />
+    <title>LearnFlow - Create Post</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/cstm-assets/logo.svg" type="image/png" />
+    <!-- Font Awesome 5 -->
+    <link
+      rel="stylesheet"
+      href="/libs/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <!-- Purpose CSS -->
+    <link rel="stylesheet" href="/css/purpose.css" id="stylesheet" />
+    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+
+    <style>
+      #my-video {
+        width: 640px;
+        height: 400px;
+      }
+      @media screen and (max-width: 776px) {
+        #my-video {
+          width: 350px;
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header" id="header-main">
+      <!-- Main navbar -->
+      <%- include('partials/navbar'); %>
+    </header>
+
+    <div class="main-content">
+      <!-- Header (account) -->
+
+      <section class="slice slice-lg" data-offset-top="#header-main">
+        <div class="container pt-6">
+          <div class="row justify-content-center">
+            <div class="col-md-9 mb-4">
+              <h1 class="lh-150 mb-3"><%= post.title %></h1>
+
+              <div class="media align-items-center mt-5">
+                <div>
+                  <a
+                    href="blog-article.html#"
+                    class="avatar rounded-circle mr-3"
+                  >
+                    <img alt="Image placeholder" src="<%= creator.image %>" />
+                  </a>
+                </div>
+                <div
+                  class="media-body"
+                  style="display: grid; grid-template-columns: 1fr auto"
+                >
+                  <div>
+                    <span class="d-block h6 mb-0"
+                      ><%= creator.displayName %></span
+                    >
+                    <span class="text-sm text-muted"><%= createdDate %></span>
+                  </div>
+                  <div>
+                    <a href="#" class="text-muted"></a>
+                      <%= post.views %> <i class="far fa-eye mr-3 fa"></i
+                    ></a>
+
+                    <span id="like-count"><%= post.likes %></span> Likes <%
+                    if(liked) {%>
+                    <a
+                      href="#"
+                      class="action-item action-like active ml-3"
+                      data-toggle="tooltip"
+                      id="likeBtn"
+                      data-original-title="Liked"
+                    >
+                      <i
+                        class="fas fa-thumbs-up"
+                        style="transform: scale(1.5)"
+                      ></i>
+                    </a>
+                    <% } else { %>
+
+                    <a
+                      href="#"
+                      onclick="like(`<%= post._id %>`)"
+                      class="action-item action-like active ml-3"
+                      data-toggle="tooltip"
+                      id="likeBtn"
+                      data-original-title="Like"
+                    >
+                      <i
+                        class="far fa-thumbs-up"
+                        style="transform: scale(1.5)"
+                      ></i>
+                    </a>
+                    <% } %>
+                    <a
+                      style="cursor: pointer"
+                      data-toggle="tooltip"
+                      data-original-title="Share Link"
+                      class="ml-3"
+                      id="shareBtn"
+                      onclick="share()"
+                    >
+                      <i
+                        class="fas fa-share-square"
+                        style="transform: scale(1.5)"
+                      ></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <video
+              id="my-video"
+              class="video-js"
+              controls
+              preload="auto"
+              data-id="<%= post._id %>"
+              poster="<%= post.thumbnailKey %>"
+              data-setup="{}"
+            >
+              <source src="/video/<%= post._id %>" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <!-- <video
+        src="/video/<%= post._id %>"
+        width="600px"
+        type="video/mp4"
+        controls
+      ></video> -->
+
+      <section class="slice">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-9">
+              <!-- Article body -->
+              <article><%- post.description %></article>
+              <hr />
+              <h5 class="mb-4">Comments</h5>
+              <div class="mb-3">
+                <% for(var comment of comments) {%>
+                <div class="media media-comment">
+                  <img
+                    alt="Image placeholder"
+                    class="rounded-circle shadow mr-4"
+                    src="<%= comment.authorImage %>"
+                    style="width: 64px"
+                  />
+                  <div class="media-body" id="comment-<%= comment._id %>">
+                    <div class="media-comment-bubble left-top">
+                      <h6 class="mt-0"><%= comment.author %></h6>
+                      <p class="text-sm lh-160"><%= comment.commentText %></p>
+                      <div class="icon-actions">
+                        <button
+                          href="blog-article.html#"
+                          class="btn btn-small"
+                          onclick="loadReplies(`<%= comment._id %>`, `<%= comment.depth %>`)"
+                        >
+                          <i class="fas fa-comment"></i>
+                          <span class="text-muted">View Replies</span>
+                        </button>
+
+                        <button
+                          href="blog-article.html#"
+                          class="btn btn-small"
+                          onclick="addReplyBox(`<%= comment._id %>`, `<%= comment.depth %>`)"
+                        >
+                          <i class="fas fa-reply"></i>
+                          <span class="text-muted">Reply</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <% } %>
+                <div class="media media-comment align-items-center">
+                  <img
+                    alt="Image placeholder"
+                    class="avatar rounded-circle shadow mr-4"
+                    src="<%= user.image %>"
+                  />
+                  <div class="media-body">
+                    <form
+                      class="post-<%= post._id %>"
+                      id="post-<%= post._id %>"
+                    >
+                      <div class="form-group mb-0">
+                        <div class="input-group input-group-merge border">
+                          <textarea
+                            class="form-control"
+                            data-toggle="autosize"
+                            name="commentText"
+                            id="commentText"
+                            placeholder="Write your comment"
+                            rows="1"
+                          ></textarea>
+                          <div class="input-group-append">
+                            <button
+                              class="btn btn-primary"
+                              form="post-<%= post._id %>"
+                              id="comment-button-<%= post._id %>"
+                              type="submit"
+                            >
+                              <span class="fas fa-paper-plane"></span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <%- include('partials/footer') %>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="/js/purpose.core.js"></script>
+    <!-- Page JS -->
+    <script src="/libs/autosize/dist/autosize.min.js"></script>
+    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    <!-- Purpose JS -->
+    <script src="/js/purpose.js"></script>
+    <!-- Demo JS - remove it when starting your project -->
+    <script src="/js/demo.js"></script>
+    <!-- onclick="addComment(`post-<%= post._id %>`, 1, null, `<%= user.username%>`, )" -->
+    <script>
+      function addAlpha(color, opacity) {
+        // coerce values so ti is between 0 and 1.
+        const _opacity = Math.round(
+          Math.min(Math.max(opacity || 1, 0), 1) * 255
+        );
+        return color + _opacity.toString(16).toUpperCase();
+      }
+      const coverDiv = document.querySelector("#bg-cover");
+      coverDiv.style.backgroundImage = `url(<%= post.cover %>)`;
+      const article = document.querySelector("article");
+      let children = article.children;
+      for (let i = 0; i < children.length; i++) {
+        let child = children[i];
+        // child.style.color = `#8492A6`;
+        child.style.background = addAlpha("#F8F8FB", 1);
+        child.style.fontFamily = ``;
+      }
+    </script>
+
+    <script>
+      const commentForm = document.querySelector(`.post-<%- post._id %>`);
+      commentForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const commentText = commentForm.commentText.value;
+        const postId = `<%= post._id %>`;
+        const depth = 1;
+        const parentId = null;
+        const formData = new FormData();
+        formData.append("commentText", commentText);
+        formData.append("postId", postId);
+        formData.append("depth", depth);
+        formData.append("parentId", parentId);
+        try {
+          const res = await fetch("/comment/add", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+          if (data._id) {
+            console.log(data._id);
+            window.location.reload(true);
+          } else {
+            throw new Error("Something went wrong");
+          }
+        } catch (error) {
+          alert("Oops something went wrong !");
+        }
+      });
+    </script>
+
+    <script>
+      const addReplyBox = (parentId, parentDepth) => {
+        const parentComment = document.querySelector(`#comment-${parentId}`);
+        const replyBox = document.createElement("div");
+        replyBox.classList.add("media", "media-comment", "align-items-center");
+        let replyButtonFunction =
+          "replyFunction(`" + parentId + "`," + "`" + parentDepth + "`)";
+        replyBox.innerHTML = `
+      <img
+                  alt="Image placeholder"
+                  class="avatar rounded-circle shadow mr-4"
+                  src="<%= user.image %>"
+                />
+                <div class="media-body">
+                  <form
+                    class="comment-reply-${parentId}"
+                    id="comment-<%= user.username %>-${parentId}-${parentDepth}"
+                    
+                  >
+                    <div class="form-group mb-0">
+                      <div class="input-group input-group-merge border">
+                        <textarea
+                          class="form-control"
+                          data-toggle="autosize"
+                          name="commentText"
+                          id="commentText"
+                          placeholder="Write your comment"
+                          rows="1"
+                        ></textarea>
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-primary"
+                            form="comment-${parentId}"
+                            id="comment-button-${parentId}"
+                            onclick = "${replyButtonFunction}"
+                            type="submit"
+                          >
+                            <span class="fas fa-paper-plane"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+      
+      `;
+        parentComment.appendChild(replyBox);
+        // const replyForm = document.querySelector(`.comment-reply-${parentId}`);
+
+        // replyForm.addEventListener("submit", async (e) => {
+        //   e.preventDefault();
+        //   console.log("HERE");
+        //   console.log(replyForm);
+        //   console.log(parentId, parentDepth);
+        // });
+      };
+    </script>
+    <script>
+      const replyFunction = async (parentId, parentDepth) => {
+        const replyForm = document.querySelector(`.comment-reply-${parentId}`);
+        const commentText = replyForm.commentText.value;
+        const postId = `<%= post._id %>`;
+        const depth = Number(parentDepth) + 1;
+        const formData = new FormData();
+        formData.append("commentText", commentText);
+        formData.append("postId", postId);
+        formData.append("depth", depth);
+        formData.append("parentId", parentId);
+        try {
+          const res = await fetch("/comment/add", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+          if (data._id) {
+            console.log(data._id);
+            window.location.reload(true);
+          } else {
+            throw new Error("Something went wrong");
+          }
+        } catch (error) {
+          alert("Oops something went wrong !");
+        }
+
+        // console.log(replyForm.commentText.value);
+      };
+    </script>
+
+    <script>
+      const loadReplies = async (parentId, parentDepth) => {
+        try {
+          const res = await fetch(
+            `/comment/threads?parentId=${parentId}&parentDepth=${parentDepth}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+          const data = await res.json();
+          console.log(data);
+          const parentBody = document.querySelector(`#comment-${parentId}`);
+          for (var comment of data.comments) {
+            const commentBox = document.createElement("div");
+            commentBox.classList.add("media", "media-comment");
+            let replyButtonFunction =
+              "addReplyBox(`" + comment._id + "`," + "`" + comment.depth + "`)";
+            let loadRepliesButtonFunction =
+              "loadReplies(`" + comment._id + "`," + "`" + comment.depth + "`)";
+            commentBox.innerHTML = `<img
+                  alt="Image placeholder"
+                  class="rounded-circle shadow mr-4"
+                  src="${comment.authorImage}"
+                  style="width: 64px"
+                />
+                <div class="media-body" id="comment-${comment._id}">
+                  <div class="media-comment-bubble left-top">
+                    <h6 class="mt-0">${comment.author}</h6>
+                    <p class="text-sm lh-160"> ${comment.commentText} </p>
+                    <div class="icon-actions">
+                      <button
+                        href="blog-article.html#"
+                        class="btn btn-small"
+                        onclick="${loadRepliesButtonFunction}"
+                      >
+                        <i class="fas fa-comment"></i>
+                        <span class="text-muted">View Replies</span>
+                      </button>
+                      <!-- <a href="blog-article.html#" class="love active">
+                        <i class="fas fa-heart"></i>
+                        <span class="text-muted">10 likes</span>
+                      </a> -->
+
+                      <button
+                        href="blog-article.html#"
+                        class="btn btn-small"
+                        onclick="${replyButtonFunction}"
+                      >
+                        <i class="fas fa-reply"></i>
+                        <span class="text-muted">Reply</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>`;
+            parentBody.appendChild(commentBox);
+          }
+        } catch (error) {
+          alert("Oops something went wrong!");
+        }
+      };
+    </script>
+    <script>
+      const like = async (postID) => {
+        const response = await fetch("/post/like", {
+          method: "PATCH",
+          body: JSON.stringify({
+            id: postID,
+          }),
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await response.json();
+        if (response.status == 200) {
+          const likeBtn = document.querySelector("#likeBtn");
+          const likeCnt = document.querySelector("#like-count");
+          likeCnt.innerHTML = Number(likeCnt.textContent.trim()) + 1;
+          likeBtn.innerHTML = `<i class="fas fa-thumbs-up fa-2x"></i>`;
+        } else {
+          alert("Oops, Something went wrong!");
+        }
+      };
+      const share = () => {
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(window.location.href);
+        const shareBtn = document.querySelector("#shareBtn");
+        console.log(shareBtn);
+        shareBtn.setAttribute("data-original-title", "Copied to Clipboard");
+        setTimeout(() => {
+          shareBtn.setAttribute("data-original-title", "Share Link");
+        }, 5000);
+      };
+    </script>
+
+    <script>
+      const myVideo = document.getElementById("my-video");
+      let viewed = JSON.parse("<%= JSON.stringify(viewed) %>");
+      let postID = myVideo.getAttribute("data-id");
+      // Add a timeupdate event listener to the video
+      myVideo.addEventListener("timeupdate", async function () {
+        // Calculate the percentage of the myVideo that has been played
+        const playedPercentage = (myVideo.currentTime / myVideo.duration) * 100;
+
+        // Check if the video has been played for more than 20%
+        if (playedPercentage >= 20) {
+          if (!viewed) {
+            viewed = true;
+
+            const response = await fetch("/post/view", {
+              method: "PATCH",
+              body: JSON.stringify({
+                id: postID,
+              }),
+              headers: { "Content-Type": "application/json" },
+            });
+            const data = await response.json();
+            if (response.status == 200) {
+              viewed = true;
+            } else {
+              viewed = false;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

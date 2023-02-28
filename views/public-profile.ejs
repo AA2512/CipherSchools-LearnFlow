@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Purpose is a unique and beautiful collection of UI elements that are all flexible and modular. A complete and customizable solution to building the website of your dreams."
+    />
+    <meta name="author" content="Webpixels" />
+    <title>LearnFlow</title>
+    <!-- Favicon -->
+    <link rel="icon" href="../img/brand/favicon.png" type="image/png" />
+    <!-- Font Awesome 5 -->
+    <link
+      rel="stylesheet"
+      href="../libs/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <!-- Page CSS -->
+    <link
+      type="text/css"
+      href="../libs/@fancyapps/fancybox/dist/jquery.fancybox.min.css"
+      rel="stylesheet"
+    />
+    <!-- Purpose CSS -->
+    <link rel="stylesheet" href="../css/purpose.css" id="stylesheet" />
+  </head>
+
+  <body>
+    <header class="header header-transparent" id="header-main">
+      <!-- Main navbar -->
+      <%- include('partials/navbar'); %>
+    </header>
+
+    <div class="main-content">
+      <!-- Header (account) -->
+      <%- include('partials/header'); %>
+      <section class="pt-5 pt-lg-0">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <!-- Profile Card -->
+              <%- include('partials/profile'); %>
+            </div>
+            <div class="col-lg-8 mt-lg-5">
+              <!-- Timeline -->
+              <div class="card">
+                <div class="card-header pt-4 pb-2">
+                  <div class="d-flex align-items-center">
+                    <a class="avatar rounded-circle shadow">
+                      <img
+                        alt="Image placeholder"
+                        src="<%= publicProfile.image %>"
+                      />
+                    </a>
+                    <div class="avatar-content">
+                      <h6 class="mb-0"><%= publicProfile.username %></h6>
+                      <small class="d-block text-muted"
+                        ><i class="fas fa-user mr-2"></i><%=
+                        publicProfile.displayName %></small
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <p><%= publicProfile.about %></p>
+                  <!-- Badges -->
+                  <div class="d-lg-flex mt-4">
+                    <a
+                      href="account-profile-public.html#"
+                      class="d-flex align-items-center mr-lg-5 mb-3 mb-lg-0"
+                    >
+                      <div>
+                        <div
+                          class="icon icon-sm bg-gradient-success text-white rounded-circle icon-shape"
+                        >
+                          <i class="fas fa-user-ninja"></i>
+                        </div>
+                      </div>
+                      <div class="pl-3">
+                        <span class="h6">10 Skills</span>
+                      </div>
+                    </a>
+                    <a
+                      href="account-profile-public.html#"
+                      class="d-flex align-items-center mr-lg-5 mb-3 mb-lg-0"
+                    >
+                      <div>
+                        <div
+                          class="icon icon-sm bg-gradient-warning text-white rounded-circle icon-shape"
+                        >
+                          <i class="fas fa-user-friends"></i>
+                        </div>
+                      </div>
+                      <div class="pl-3">
+                        <span class="h6">57 Endorsements</span>
+                      </div>
+                    </a>
+                    <a
+                      href="account-profile-public.html#"
+                      class="d-flex align-items-center mr-lg-5 mb-3 mb-lg-0"
+                    >
+                      <div>
+                        <div
+                          class="icon icon-sm bg-gradient-primary text-white rounded-circle icon-shape"
+                        >
+                          <i class="fas fa-award"></i>
+                        </div>
+                      </div>
+                      <div class="pl-3">
+                        <span class="h6">7 Awards</span>
+                      </div>
+                    </a>
+                  </div>
+                  <!-- <div class="pt-5 mt-5 delimiter-top">
+                    <h6 class="mb-4">
+                      <i class="fas fa-file-signature mr-2"></i>Experience
+                    </h6>
+                    <div
+                      class="timeline timeline-one-side"
+                      data-timeline-content="axis"
+                    >
+                      <div class="timeline-block">
+                        <span class="timeline-step border-primary"></span>
+                        <div class="timeline-content">
+                          <small class="text-muted font-weight-bold"
+                            >2016 - present</small
+                          >
+                          <h6>Web Developer at Webpixels</h6>
+                          <p class="text-sm lh-160">
+                            When we strive to become better than we are
+                            everything around us becomes better too. This is a
+                            wider card with supporting text below.
+                          </p>
+                          <div>
+                            <span class="badge badge-soft-primary mr-2 mb-2"
+                              >Bootstrap</span
+                            >
+                            <span class="badge badge-soft-primary mr-2 mb-2"
+                              >UI/UX</span
+                            >
+                            <span class="badge badge-soft-primary mr-2 mb-2"
+                              >Market Strategy</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-block">
+                        <span
+                          class="timeline-step timeline-step-sm border-warning"
+                        ></span>
+                        <div class="timeline-content">
+                          <small class="text-muted font-weight-bold"
+                            >2014 - 2016</small
+                          >
+                          <h6>Front Designer at Google</h6>
+                          <p class="text-sm lh-160">
+                            When we strive to become better than we are
+                            everything around us becomes better too. This is a
+                            wider card with supporting text below.
+                          </p>
+                          <div>
+                            <span class="badge badge-soft-warning mr-2 mb-2"
+                              >HTML5</span
+                            >
+                            <span class="badge badge-soft-warning mr-2 mb-2"
+                              >CSS3</span
+                            >
+                            <span class="badge badge-soft-warning mr-2 mb-2"
+                              >Responsive Design</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-block">
+                        <span
+                          class="timeline-step timeline-step-sm border-info"
+                        ></span>
+                        <div class="timeline-content">
+                          <small class="text-muted font-weight-bold"
+                            >2013 - 2014</small
+                          >
+                          <h6>Internship at Apple</h6>
+                          <p class="text-sm lh-160">
+                            When we strive to become better than we are
+                            everything around us becomes better too. This is a
+                            wider card with supporting text below.
+                          </p>
+                          <div>
+                            <span class="badge badge-soft-info mr-2 mb-2"
+                              >Product Design</span
+                            >
+                            <span class="badge badge-soft-info mr-2 mb-2"
+                              >Development</span
+                            >
+                            <span class="badge badge-soft-info mr-2 mb-2"
+                              >Market Strategy</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="pt-5 mt-5 delimiter-top">
+                    <!-- Title -->
+                    <h6><i class="fas fa-user-n mr-2 mb-4"></i>Skills</h6>
+                    <!-- Skil badges -->
+                    <div>
+                      <% for(var skill of publicProfile.skills) { %>
+                      <a
+                        href="#"
+                        class="badge badge-lg badge-soft-primary d-inline-block mr-2 mb-2"
+                        ><%= skill %></a
+                      >
+                      <% } %>
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+
+              
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <h5 class="card-title mb-0">Recent Posts</h5>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="card-body">
+                  <% for(let i=0; i<posts.length; i+=2) { %>
+                    <div class="row">
+                      <div class="col">
+                    <div class="card card-product">
+                      <div class="card-header border-0">
+                        <h2 class="h6">
+                          <a href="#"><%= posts[i].title%></a>
+                        </h2>
+                      </div>
+                      <!-- Product image -->
+                      <figure class="figure">
+                        <img alt="Image placeholder" src="<%= posts[i].cover%>" class="img-center img-fluid"  style="width: 100%; height: 20vh; object-fit: cover;">
+                      </figure>
+                      <div class="card-body" style="padding-top: 0;">
+                        <!-- Price -->
+                        <div class="d-flex align-items-center mt-4">
+                          <!-- <a type="button" target="blank" href="#" class="btn btn-info btn-sm" style="margin-top: 0; color: white">
+                              Link
+                            </a>
+                            <button type="button" class="btn btn-danger btn-sm ml-auto" style="margin-top: 0;" data-toggle="modal" data-target="#feature<%=posts[i]._id %>">
+                              Delete
+                          </button> -->
+                          <%= posts[i].description %>
+
+                         
+                        </div>
+                      </div>
+                      
+                    </div>
+                    </div>
+                    <% if(i+1<posts.length) {%>
+                      <div class="col">
+                      <div class="card card-product">
+                        <div class="card-header border-0">
+                          <h2 class="h6">
+                            <a href="#"><%= posts[i+1].title%></a>
+                          </h2>
+                        </div>
+                        <!-- Product image -->
+                        <figure class="figure">
+                          <img alt="Image placeholder" src="<%= posts[i+1].cover%>" class="img-center img-fluid" style="width: 100%; height: 20vh; object-fit: cover;" loading="lazy">
+                        </figure>
+                        <div class="card-body" style="padding-top: 0;">
+                        <!-- Price -->
+                        <div class="d-flex align-items-center mt-4">
+                            <%= posts[i].description %>
+                        </div>
+                      </div>
+                        
+                      </div>
+                    </div>
+                    <% }  else {%>
+                    <div class="col"></div>
+                    <% } %>
+
+                    
+                    
+                    </div>
+                    
+                  <% } %>
+                 
+                </div>
+
+                
+              </div>
+
+             
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer
+      class="footer p-0 footer-light bg-section-secondary"
+      id="footer-main"
+    >
+      <div class="container">
+        <div class="py-4">
+          <div class="row align-items-md-center">
+            <div class="col-md-4 mb-4 mb-md-0">
+              <div class="d-flex align-items-center">
+                <p class="text-sm mb-0">
+                  &copy; Purpose. 2019
+                  <a href="https://webpixels.io" target="_blank">Webpixels</a>.
+                  All rights reserved.
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4 mb-4 mb-sm-0">
+              <ul class="nav justify-content-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="../utility/support.html">Support</a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://preview.webpixels.io/purpose-website-ui-kit/pages/utility/terms.html"
+                    >Terms</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://preview.webpixels.io/purpose-website-ui-kit/pages/utility/privacy.html"
+                    >Privacy</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <ul
+                class="nav justify-content-center justify-content-md-end mt-3 mt-md-0"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://dribbble.com/webpixels"
+                    target="_blank"
+                  >
+                    <i class="fab fa-dribbble"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://www.instagram.com/webpixelsofficial"
+                    target="_blank"
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://github.com/webpixels"
+                    target="_blank"
+                  >
+                    <i class="fab fa-github"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="https://www.facebook.com/webpixels"
+                    target="_blank"
+                  >
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="../js/purpose.core.js"></script>
+    <!-- Page JS -->
+    <script src="../libs/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script src="../libs/autosize/dist/autosize.min.js"></script>
+    <!-- Purpose JS -->
+    <script src="../js/purpose.js"></script>
+    <!-- Demo JS - remove it when starting your project -->
+    <script src="../js/demo.js"></script>
+  </body>
+</html>
