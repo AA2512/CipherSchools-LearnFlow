@@ -10,7 +10,7 @@ LearnFlow is a video streaming website where users can select a video from the h
 
 - Users can sign in and register using Google.
 - Users can select their role during registration as either a creator or student.
-- Users can like and comment on the videos.
+- Users can like, comment on the videos and share videos publicly (No auth required)
 - Users can reply to existing comments with infinite nesting allowed.
 - Each Video is marked as Viewed once a User watches 20% (just a threshold) of the video.
 - Allowed creators to upload videos which are strored in an AWS S3 Bucket.
@@ -38,6 +38,13 @@ LearnFlow is a video streaming website where users can select a video from the h
    - `awsSecretAccessKey`: AWS IAM User with Access to S3 bucket Access Key Secret
 4. Run `npm run dev` to start the server.
 5. Vist `http://localhost:3000/` on your browser
+
+## Future Work
+
+- Adding Email and Password Based Authentication
+- Shifting Frontend to React.js
+- Shifting the Content Delivery from S3 to CloudFront to ensure cached response
+- Add Edit and Delete Post Routes
 
 ## Authors
 
