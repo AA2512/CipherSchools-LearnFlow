@@ -5,7 +5,7 @@ const User = require("../models/User");
 const moment = require("moment");
 moment().format();
 
-let callbackURL = "https://trainity.link/auth/google/callback"; // Change
+let callbackURL = "https://learnflow.link/auth/google/callback"; // Change
 if (process.env.NODE_ENV === "development") {
   callbackURL = "/auth/google/callback";
 }
@@ -16,8 +16,8 @@ module.exports = function (passport) {
     new GoogleStrategy(
       {
         clientID:
-          "607288417198-seoj3alc45p00msieqlagj6kttgdnnje.apps.googleusercontent.com",
-        clientSecret: "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",
+          "1091800035055-hvb34fqmrboq17v5j56fphbshbon4g29.apps.googleusercontent.com",
+        clientSecret: "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",
         callbackURL: callbackURL,
       },
       async (accessToken, refreshToken, profile, done) => {
