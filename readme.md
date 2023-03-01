@@ -30,7 +30,14 @@ LearnFlow is a video streaming website where users can select a video from the h
 
 1. Clone the repository from GitHub.
 2. Run `npm install` to install all the dependencies.
-3. Run `npm run dev` to start the server.
+3. Create a keys.js file in config directory and define the following keys
+   - `mongoURI`: Connection URL to MongoDB Database
+   - `googleClientID`: Google OAuth Credentials Client ID
+   - `googleClientSecret`: Google OAuth Credentials Client Secret
+   - `awsAccessKeyID`: AWS IAM User (with Access to S3 bucket) Access Key ID
+   - `awsSecretAccessKey`: AWS IAM User with Access to S3 bucket Access Key Secret
+4. Run `npm run dev` to start the server.
+5. Vist `http://localhost:3000/` on your browser
 
 ## Authors
 
