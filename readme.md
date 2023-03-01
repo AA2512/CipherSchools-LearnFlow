@@ -39,7 +39,7 @@ LearnFlow is a video streaming website where users can select a video from the h
 4. Run `npm run dev` to start the server.
 5. Vist `http://localhost:3000/` on your browser
 
-## Future Work
+## Features Coming Soon
 
 - Adding Email and Password Based Authentication
 - Shifting Frontend to React.js
