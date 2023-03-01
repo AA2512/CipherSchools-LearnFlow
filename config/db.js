@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { mongoURI } = require("./keys");
 
 const connectDB = async () => {
   try {
@@ -7,10 +8,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
       useFindAndModify: false,
     };
-    const conn = await mongoose.connect(
-      "mongodb+srv://aditya:adityaagr00@cluster0.tzyhazw.mongodb.net/?retryWrites=true&w=majority",
-      options
-    );
+    const conn = await mongoose.connect(mongoURI, options);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(error);

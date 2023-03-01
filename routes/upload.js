@@ -2,14 +2,15 @@ const express = require("express");
 const AWS = require("aws-sdk");
 const { v4: uuid } = require("uuid");
 const { ensureAuth } = require("../middleware/auth");
+const { awsAccessKeyID, awsSecretAccessKey } = require("../config/keys");
 
 const router = express.Router();
 
 const s3 = new AWS.S3({
   signatureVersion: "v4",
   region: "ap-south-1",
-  accessKeyId: "AKIASY7P4RMDZD6C6BZT",
-  secretAccessKey: "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",
+  accessKeyId: awsAccessKeyID,
+  secretAccessKey: awsSecretAccessKey,
 });
 
 router.get("/video", (req, res) => {

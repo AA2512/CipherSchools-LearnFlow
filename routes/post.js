@@ -1,6 +1,5 @@
 const express = require("express");
 const Post = require("../models/Post");
-const cloudinary = require("cloudinary");
 const User = require("../models/User");
 const Like = require("../models/Like");
 const moment = require("moment");
@@ -10,13 +9,6 @@ const { ensureGuest, ensureAuth } = require("../middleware/auth");
 const { ensureCreator } = require("../middleware/user");
 const View = require("../models/View");
 const router = express.Router();
-
-//Cloudinary Config
-cloudinary.config({
-  cloud_name: "djtqk69w2",
-  api_key: "988281195666512",
-  api_secret: "gAYRXw0injArpakh9jIdPjt2etM",
-});
 
 // All the routes are automatically prefixed by /post
 

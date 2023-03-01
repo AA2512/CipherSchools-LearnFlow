@@ -1,5 +1,6 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
+const { googleClientID, googleClientSecret } = require("./keys");
 
 //Moment JS
 const moment = require("moment");
@@ -15,9 +16,8 @@ module.exports = function (passport) {
   passport.use(
     new GoogleStrategy(
       {
-        clientID:
-          "1091800035055-hvb34fqmrboq17v5j56fphbshbon4g29.apps.googleusercontent.com",
-        clientSecret: "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",
+        clientID: googleClientID,
+        clientSecret: googleClientSecret,
         callbackURL: callbackURL,
       },
       async (accessToken, refreshToken, profile, done) => {
