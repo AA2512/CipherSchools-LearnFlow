@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="Purpose Application UI is the following chapter we've finished in order to create a complete and robust solution next to the already known Purpose Website UI."
+    />
+    <meta name="author" content="Webpixels" />
+    <title>Trainity Dashboard</title>
+    <!-- Favicon -->
+    <!-- Favicon -->
+    <link rel="icon" href="../img/custom/favicon-32x32.jpg" type="image/png" />
+    <!-- Font Awesome 5 -->
+    <link
+      rel="stylesheet"
+      href="../../libs/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+    <!-- Page CSS -->
+    <!-- <link
+      rel="stylesheet"
+      href="../../libs/quill/dist/quill.core.css"
+      type="text/css"
+    /> -->
+    <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.bubble.css" />
+    <link rel="stylesheet" href="../../libs/select2/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="../../libs/flatpickr/dist/flatpickr.min.css" />
+    <!-- Purpose CSS -->
+    <link rel="stylesheet" href="../../css/purpose.css" id="stylesheet" />
+  </head>
+
+  <body class="application application-offset">
+    <div
+      class="modal fade fixed-right"
+      id="modal-products"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-vertical" role="document">
+        <div class="modal-content">
+          <div class="scrollbar-inner">
+            <div class="modal-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Application container -->
+    <div class="container-fluid container-application">
+      <!-- Sidenav -->
+      <%- include('partials/sidepanel'); -%>
+      <!-- Content -->
+      <div class="main-content footer-margin-mobile position-relative">
+        <!-- Main nav -->
+        <%- include('partials/navbar'); -%>
+
+        <!-- Page content -->
+        <div class="page-content">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <!-- Page title -->
+              <div class="page-title">
+                <div class="row justify-content-between align-items-center">
+                  <div
+                    class="col-md-6 d-flex align-items-center justify-content-between justify-content-md-start mb-3 mb-md-0"
+                  >
+                    <!-- Page title + Go Back button -->
+                    <div class="d-inline-block">
+                      <h5
+                        class="h4 d-inline-block font-weight-400 mb-0 text-white"
+                      >
+                        Create Course
+                      </h5>
+                    </div>
+                    <!-- Additional info -->
+                  </div>
+                </div>
+              </div>
+              <%- include('partials/utility-modals'); -%>
+              <form class="mt-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label class="form-control-label">Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label">Course ID</label>
+                      <input
+                        type="number"
+                        name="courseID"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Days to Complete</label>
+                      <input
+                        type="number"
+                        name="daysToComplete"
+                        class="form-control"
+                        required
+                        min="30"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <div class="mt-4">
+                        <input
+                          type="file"
+                          name="course-logo"
+                          id="course-logo"
+                          class="custom-input-file custom-input-file--2"
+                          data-multiple-caption="{count} files selected"
+                        />
+                        <label for="course-logo">
+                          <i class="fa fa-upload"></i>
+                          <span>Choose a file…</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- Task date -->
+                    <!-- Button trigger modal -->
+                    <button type="submit" class="btn btn-primary">
+                      Create
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <%- include('partials/footer'); -%>
+      </div>
+    </div>
+    <!-- Scripts -->
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="../../js/purpose.core.js"></script>
+    <!-- Page JS -->
+    <script src="../../libs/dropzone/dist/min/dropzone.min.js"></script>
+    <script src="../../libs/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <!-- <script src="../../libs/quill/dist/quill.min.js"></script> -->
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="../../libs/select2/dist/js/select2.min.js"></script>
+    <script src="../../libs/flatpickr/dist/flatpickr.min.js"></script>
+    <!-- Purpose JS -->
+    <script src="../../js/purpose.js"></script>
+    <!-- Demo JS - remove it when starting your project -->
+    <script src="../../js/demo.js"></script>
+
+    <script>
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const courseID = form.courseID.value;
+        const daysToComplete = form.daysToComplete.value;
+        const title = form.title.value;
+        const courseLogoFile = document.querySelector("#course-logo").files[0];
+        const courseLogoFileName = courseLogoFile.name;
+        const courseLogoContentType = courseLogoFile.type;
+        const uploadType = "learning";
+
+        $("#loadingModal").modal("show");
+        $("#errorModal").modal("hide");
+        $("#successModal").modal("hide");
+
+        const urlRes = await fetch(
+          `/aws/get/preSignedUrl?fileName=${courseLogoFileName}t&contentType=${courseLogoContentType}&uploadType=${uploadType}`,
+          {
+            method: "GET",
+          }
+        );
+        const urlData = await urlRes.json();
+
+        try {
+          const response = await fetch(urlData.url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": courseLogoContentType,
+            },
+            body: courseLogoFile,
+          });
+          if (response.status === 200 && response.url) {
+            const res = await fetch("/learning/create/course", {
+              method: "POST",
+              body: JSON.stringify({
+                courseID,
+                title,
+                daysToComplete,
+                courseLogo: `https://dvfkpf9qxfl09.cloudfront.net/${urlData.key}`,
+              }),
+              headers: { "Content-Type": "application/json" },
+            });
+
+            const data = await res.json();
+
+            if (data._id) {
+              $("#loadingModal").modal("hide");
+              $("#errorModal").modal("hide");
+              $("#successModal").modal("show");
+            }
+          } else {
+            $("#loadingModal").modal("hide");
+            $("#errorModal").modal("show");
+            $("#successModal").modal("hide");
+          }
+        } catch (error) {
+          $("#loadingModal").modal("hide");
+          $("#errorModal").modal("show");
+          $("#successModal").modal("hide");
+          console.log(error);
+        }
+      });
+    </script>
+  </body>
+</html>
